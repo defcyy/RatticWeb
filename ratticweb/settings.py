@@ -22,6 +22,10 @@ from django_auth_ldap.config import LDAPSearch
 from datetime import timedelta
 from django.utils.translation import ugettext_lazy as _
 
+from django.core.management import execute_from_command_line
+import uuid
+uuid._uuid_generate_random = None
+
 config = RawConfigParser()
 config.readfp(open('conf/defaults.cfg'))
 CONFIGURED_BY = config.read(['conf/local.cfg', '/etc/ratticweb.cfg'])
