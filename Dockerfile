@@ -5,11 +5,13 @@ ENV WORK_DIR /opt/mattricweb
 
 RUN apt-get update && apt-get install -y libldap2-dev libsasl2-dev && pip install uwsgi
 
-RUN mkdir -p $WORK_DIR && \
-    git clone $GIT_REPO $WORK_DIR && \
-    chmod +x $WORK_DIR/docker-entrypoint.sh
-
+RUN mkdir -p $WORK_DIR && git clone $GIT_REPO $WORK_DIR
 WORKDIR $WORK_DIR
+
+RUN pip install -r requirements-base.txt && \
+    pip install -r requirements-mysql.txt && \
+    chmod +x docker-entrypoint.sh
+
 EXPOSE 8000
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
