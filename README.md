@@ -18,3 +18,20 @@ Support and Known Issues:
 
 Dev Setup: <https://github.com/tildaslash/RatticWeb/wiki/Development>
 
+
+Build docker image
+
+`docker build -t ratticweb .`
+
+Run with docker
+
+environment variables
+
+`SECRET_KEY`
+`DEBUG` django server debug mode default false
+`HOSTNAME` hostname for django server allowed hosts
+`MYSQL_HOST` mysql database host default localhost
+`MYSQL_PORT` mysql database port default 3306
+`MYSQL_USER` mysql database user default ratticweb
+`MYSQL_PASSWORD` mysql database password default ratticweb
+`MYSQL_DB` mysql database name default ratticdb

@@ -31,7 +31,7 @@ media = /var/ratticweb/media
 static = /var/ratticweb/static
 EOF
 
-id -u ratticweb &> /dev/null || ratticweb
+id -u ratticweb &> /dev/null || useradd ratticweb
 [ -d /var/ratticweb ] || mkdir -p /var/ratticweb/{media,static}
 chown -R ratticweb /var/ratticweb
 

@@ -1,13 +1,15 @@
 FROM python:2.7
 
 ENV GIT_REPO https://github.com/defcyy/RatticWeb.git
+ENV WORK_DIR /opt/mattricweb
 
-RUN apt-get update && apt install -y libldap2-dev libsasl2-dev && pip install uwsgi
+RUN apt-get update && apt-get install -y libldap2-dev libsasl2-dev && pip install uwsgi
 
-RUN mkdir /opt/mattricweb && \
-    git clone $GIT_REPO /opt/mattricweb && \
-    chmod +x /opt/mattricweb/docker-entrypoint.sh
+RUN mkdir -p $WORK_DIR && \
+    git clone $GIT_REPO $WORK_DIR && \
+    chmod +x $WORK_DIR/docker-entrypoint.sh
 
+WORKDIR $WORK_DIR
 EXPOSE 8000
 
-ENTRYPOINT ["/opt/mattricweb/docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
