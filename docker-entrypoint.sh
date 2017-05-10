@@ -4,7 +4,7 @@ set -e
 WORK_DIR=${WORK_DIR:=/opt/ratticweb}
 PROCESSES_NUM=${PROCESSES_NUM:=4}
 SECRET_KEY=${SECRET_KEY:=FFEB9031-1A1B-4F72-ADC4-119D1ECEBE52}
-DEBUG=${DEBUG:=true}
+DEBUG=${DEBUG:=false}
 HOSTNAME=${HOSTNAME:=localhost}
 MYSQL_USER=${MYSQL_USER:=ratticweb}
 MYSQL_PASSWORD=${MYSQL_PASSWORD:=ratticweb}
@@ -40,4 +40,6 @@ python manage.py syncdb --settings=ratticweb.settings
 python manage.py migrate --settings=ratticweb.settings
 python manage.py collectstatic --settings=ratticweb.settings --noinput
 
-uwsgi --http 0.0.0.0:8000 --chdir $WORK_DIR --module ratticweb.wsgi:application --uid ratticweb --master --processes $PROCESSES_NUM
+nginx
+
+uwsgi --http 127.0.0.1:8000 --chdir $WORK_DIR --module ratticweb.wsgi:application --uid ratticweb --master --processes $PROCESSES_NUM
