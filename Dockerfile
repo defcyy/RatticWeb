@@ -8,10 +8,9 @@ RUN apt-get update && apt-get install -y libldap2-dev libsasl2-dev nginx && pip 
 RUN mkdir -p $WORK_DIR && git clone $GIT_REPO $WORK_DIR
 WORKDIR $WORK_DIR
 
-COPY nginx.conf /etc/nginx/sites-enabled/default
-
 RUN pip install -r requirements-base.txt && \
     pip install -r requirements-mysql.txt && \
+    cp nginx.conf /etc/nginx/sites-enabled/default && \
     chmod +x docker-entrypoint.sh
 
 EXPOSE 80
